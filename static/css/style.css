@@ -1,0 +1,29 @@
+/*
+ * style.css — custom styles that sit on top of Bootstrap.
+ *
+ * Bootstrap already handles most of the layout and colours, so this file
+ * only adds the small tweaks that make the app feel unique.
+ */
+
+/* Use the Nunito web font (loaded from Google Fonts in the HTML <head>) */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f4f8;  /* a light blue-grey page background */
+}
+
+/* Round the card corners a little more than Bootstrap's default */
+.card {
+    border-radius: 14px;
+    border: none;
+}
+
+/* Give the result card a warm off-white background to stand out */
+.result-card {
+    background-color: #fff8f0;
+}
+
+/* Style the main headings */
+h1, h2 {
+    color: #2c3e50;
+    font-weight: 700;
+}

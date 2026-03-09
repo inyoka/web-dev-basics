@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker</title>
+
+    <!--
+        Bootstrap CSS — a popular CSS framework that gives us ready-made styles
+        and a responsive grid layout. We load it from a CDN (Content Delivery
+        Network) so we don't need to download or host the file ourselves.
+    -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!--
+        Font Awesome — a library of icons, also loaded from a CDN.
+        We can use icons with tags like: <i class="fa-solid fa-book-open"></i>
+    -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet"
+    >
+
+    <!--
+        Google Fonts — a web font (Nunito) loaded from a CDN.
+        We tell our CSS to use this font in style.css.
+    -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!--
+        Our own CSS file, stored in static/css/.
+        url_for() is a Jinja helper that builds the correct path to the file.
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <div class="card shadow">
+                    <div class="card-body">
+
+                        <h1 class="card-title text-center mb-1">
+                            <i class="fa-solid fa-book-open"></i> Study Tracker
+                        </h1>
+                        <p class="text-center text-muted mb-4">
+                            Tell us about your study session today!
+                        </p>
+
+                        <!--
+                            The form uses method="POST" so the data is sent
+                            in the request body rather than the URL.
+                            action="/result" tells the browser which route to send it to.
+                        -->
+
+                        {# Show an error message if Flask passed one back #}
+                        {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endif %}
+
+                        <form action="/result" method="POST">
+
+                            <div class="mb-3">
+                                <label for="student_name" class="form-label">
+                                    Your name
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="student_name"
+                                    name="student_name"
+                                    placeholder="Enter your name"
+                                    maxlength="50"
+                                    required
+                                >
+                                <!-- This small element is updated live by JavaScript -->
+                                <small id="name_counter" class="text-muted"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">
+                                    Subject studied
+                                </label>
+                                <select
+                                    class="form-select"
+                                    id="subject"
+                                    name="subject"
+                                    required
+                                >
+                                    <option value="" disabled selected>Choose a subject…</option>
+                                    <option value="Maths">Maths</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="History">History</option>
+                                    <option value="English">English</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="hours" class="form-label">
+                                    Hours studied today
+                                </label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="hours"
+                                    name="hours"
+                                    min="0"
+                                    max="12"
+                                    step="0.5"
+                                    placeholder="e.g. 2"
+                                    required
+                                >
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fa-solid fa-paper-plane"></i> Submit
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle — also loaded from a CDN -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+    <!-- Our own JavaScript file, stored in static/js/ -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
